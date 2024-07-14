@@ -17,7 +17,9 @@ def count_images_in_classes(directory):
 
 def load_data(training_dir, testing_dir):
     try:
+        print(f"Loading data from Training directory: {training_dir}")
         training_counts = count_images_in_classes(training_dir)
+        print(f"Loading data from Testing directory: {testing_dir}")
         testing_counts = count_images_in_classes(testing_dir)
         return training_counts, testing_counts
     except FileNotFoundError:
@@ -50,6 +52,11 @@ def show_sample_images(training_dir, testing_dir, training_counts, testing_count
 base_dir = 'C:/Users/HP/Downloads/brain_tumor/main'
 training_dir = os.path.join(base_dir, 'Training')
 testing_dir = os.path.join(base_dir, 'Testing')
+
+# Print out the paths for verification
+print(f"Base directory: {base_dir}")
+print(f"Training directory: {training_dir}")
+print(f"Testing directory: {testing_dir}")
 
 # Load the data
 training_counts, testing_counts = load_data(training_dir, testing_dir)
