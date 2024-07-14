@@ -4,14 +4,21 @@ import pandas as pd
 from PIL import Image
 
 def count_images_in_classes(directory):
-    classes = os.listdir(directory)
     class_image_counts = {}
-    for cls in classes:
-        class_path = os.path.join(directory, cls)
-        if os.path.isdir(class_path):
-            images = os.listdir(class_path)
-            class_image_counts[cls] = len(images)
+    try:
+        classes = os.listdir(directory)
+        for cls in classes:
+            class_path = os.path.join(directory, cls)
+            if os.path.isdir(class_path):
+                images = os.listdir(class_path)
+                class_image_counts[cls] = len(images)
+    except FileNotFoundError:
+        print(f"Directory '{directory}' not found.")
+    except PermissionError:
+        print(f"Permission denied for directory '{directory}'.")
+    
     return class_image_counts
+
 
 def load_data(training_dir, testing_dir):
     training_counts = count_images_in_classes(training_dir)
