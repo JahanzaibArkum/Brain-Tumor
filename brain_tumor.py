@@ -11,7 +11,7 @@ def count_images_in_classes(directory):
                 images = os.listdir(class_path)
                 class_image_counts[class_name] = len(images)
     else:
-        raise FileNotFoundError(f"Directory '{directory}' not found.")
+        raise FileNotFoundError(f"Directory '{directory}' not found or empty.")
 
     return class_image_counts
 
@@ -50,8 +50,9 @@ def show_sample_images(training_dir, testing_dir, training_counts, testing_count
 
 
 # Set the directory paths (adjust these paths as per your actual dataset location)
-training_dir = '/content/Training'
-testing_dir = '/content/Testing'
+base_dir = '/content'
+training_dir = os.path.join(base_dir, 'Training')
+testing_dir = os.path.join(base_dir, 'Testing')
 
 # Load the data
 training_counts, testing_counts = load_data(training_dir, testing_dir)
