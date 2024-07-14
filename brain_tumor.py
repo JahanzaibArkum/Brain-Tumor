@@ -25,8 +25,8 @@ def load_data(training_dir, testing_dir):
     return training_counts, testing_counts
 
 # Set the directory paths
-training_dir = 'content/Training'
-testing_dir = 'content/Testing'
+training_dir = '/content/Training'
+testing_dir = '/content/Testing'
 
 # Load the data
 training_counts, testing_counts = load_data(training_dir, testing_dir)
