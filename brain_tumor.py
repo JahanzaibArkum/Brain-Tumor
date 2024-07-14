@@ -57,7 +57,7 @@ def show_sample_images(training_dir, testing_dir, training_counts, testing_count
 
 # Set the directory paths using raw string literal
 # Set the base directory
-base_dir = r'C:\Users\HP\Downloads\brain_tumor\main'
+base_dir = r'masoudnickparvar/brain-tumor-mri-dataset'
 
 # Define the training and testing directories
 training_dir = os.path.join(base_dir, 'Training')
