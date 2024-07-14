@@ -69,8 +69,8 @@ training_counts, testing_counts = load_data(training_dir, testing_dir)
 
 # Streamlit app layout
 st.title("Brain Tumor MRI Dataset Analysis")
-
-#if training_counts is not None and testing_counts is not None:
+a=1
+if(a==1): # training_counts is not None and testing_counts is not None:
     st.header("Training Dataset")
     st.write(f'Total Images: {sum(training_counts.values())} images in {len(training_counts)} classes')
     for cls, count in training_counts.items():
