@@ -1,6 +1,5 @@
 import streamlit as st
 import os
-import pandas as pd
 from PIL import Image
 
 def count_images_in_classes(directory):
@@ -50,17 +49,17 @@ def show_sample_images(training_dir, testing_dir, training_counts, testing_count
                 st.image(image, caption=f"Class: {cls}")
 
 
-# Set the directory paths
+# Set the directory paths (adjust these paths as per your actual dataset location)
 training_dir = '/content/Training'
 testing_dir = '/content/Testing'
 
 # Load the data
-try:
-    training_counts, testing_counts = load_data(training_dir, testing_dir)
+training_counts, testing_counts = load_data(training_dir, testing_dir)
 
-    # Streamlit app layout
-    st.title("Brain Tumor MRI Dataset Analysis")
+# Streamlit app layout
+st.title("Brain Tumor MRI Dataset Analysis")
 
+if training_counts is not None and testing_counts is not None:
     st.header("Training Dataset")
     st.write(f'Total Images: {sum(training_counts.values())} images in {len(training_counts)} classes')
     for cls, count in training_counts.items():
@@ -74,5 +73,5 @@ try:
     # Display sample images
     show_sample_images(training_dir, testing_dir, training_counts, testing_counts)
 
-except FileNotFoundError as e:
-    st.error(str(e))
+else:
+    st.error(f"Directory '{training_dir}' or '{testing_dir}' not found or empty.")
