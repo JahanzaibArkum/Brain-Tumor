@@ -70,7 +70,7 @@ training_counts, testing_counts = load_data(training_dir, testing_dir)
 # Streamlit app layout
 st.title("Brain Tumor MRI Dataset Analysis")
 
-if training_counts is not None and testing_counts is not None:
+#if training_counts is not None and testing_counts is not None:
     st.header("Training Dataset")
     st.write(f'Total Images: {sum(training_counts.values())} images in {len(training_counts)} classes')
     for cls, count in training_counts.items():
@@ -84,5 +84,5 @@ if training_counts is not None and testing_counts is not None:
     # Display sample images (assuming images are directly accessible via URLs)
     show_sample_images(training_dir, testing_dir, training_counts, testing_counts)
 
-else:
-    st.error(f"Directory '{training_dir}' or '{testing_dir}' not found or empty.")
+#else:
+ #   st.error(f"Directory '{training_dir}' or '{testing_dir}' not found or empty.")
