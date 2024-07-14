@@ -1,6 +1,5 @@
 import streamlit as st
 import os
-import matplotlib.pyplot as plt
 import pandas as pd
 from PIL import Image
 
@@ -43,8 +42,11 @@ for cls, count in testing_counts.items():
 # Display an example image from each class
 st.header("Sample Images")
 for cls in training_counts.keys():
-    img_path = os.path.join(training_dir, cls, os.listdir(os.path.join(training_dir, cls))[0])
-    image = Image.open(img_path)
-    st.image(image, caption=cls)
+    class_path = os.path.join(training_dir, cls)
+    images = os.listdir(class_path)
+    if images:  # Check if the directory is not empty
+        img_path = os.path.join(class_path, images[0])
+        image = Image.open(img_path)
+        st.image(image, caption=cls)
 
-# Optional: Add model inference code or other interactive features here
+# Optionally, add more Streamlit components for interactivity or additional analysis
