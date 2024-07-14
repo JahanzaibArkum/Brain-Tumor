@@ -47,7 +47,7 @@ def show_sample_images(training_dir, testing_dir, training_counts, testing_count
                 st.image(image, caption=f"Class: {cls}")
 
 # Set the directory paths (adjust these paths to the location where you extracted the dataset)
-base_dir = r'C:\Users\HP\Downloads\archive'
+base_dir = r'base_dir = 'C:\\Users\\HP\\Downloads\\brain_tumor\\main'
 training_dir = os.path.join(base_dir, 'Training')
 testing_dir = os.path.join(base_dir, 'Testing')
 
