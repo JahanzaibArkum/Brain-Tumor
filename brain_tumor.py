@@ -18,31 +18,36 @@ def count_images_in_classes(directory):
 
 
 def load_data(training_dir, testing_dir):
-    training_counts = count_images_in_classes(training_dir)
-    testing_counts = count_images_in_classes(testing_dir)
-    return training_counts, testing_counts
+    try:
+        training_counts = count_images_in_classes(training_dir)
+        testing_counts = count_images_in_classes(testing_dir)
+        return training_counts, testing_counts
+    except FileNotFoundError:
+        return None, None
 
 
 def show_sample_images(training_dir, testing_dir, training_counts, testing_counts):
     st.header("Sample Images")
     
-    st.subheader("Training Dataset")
-    for cls, count in training_counts.items():
-        class_path = os.path.join(training_dir, cls)
-        if os.path.exists(class_path) and count > 0:
-            images = os.listdir(class_path)
-            img_path = os.path.join(class_path, images[0])
-            image = Image.open(img_path)
-            st.image(image, caption=f"Class: {cls}")
+    if training_counts:
+        st.subheader("Training Dataset")
+        for cls, count in training_counts.items():
+            class_path = os.path.join(training_dir, cls)
+            if os.path.exists(class_path) and count > 0:
+                images = os.listdir(class_path)
+                img_path = os.path.join(class_path, images[0])
+                image = Image.open(img_path)
+                st.image(image, caption=f"Class: {cls}")
 
-    st.subheader("Testing Dataset")
-    for cls, count in testing_counts.items():
-        class_path = os.path.join(testing_dir, cls)
-        if os.path.exists(class_path) and count > 0:
-            images = os.listdir(class_path)
-            img_path = os.path.join(class_path, images[0])
-            image = Image.open(img_path)
-            st.image(image, caption=f"Class: {cls}")
+    if testing_counts:
+        st.subheader("Testing Dataset")
+        for cls, count in testing_counts.items():
+            class_path = os.path.join(testing_dir, cls)
+            if os.path.exists(class_path) and count > 0:
+                images = os.listdir(class_path)
+                img_path = os.path.join(class_path, images[0])
+                image = Image.open(img_path)
+                st.image(image, caption=f"Class: {cls}")
 
 
 # Set the directory paths
