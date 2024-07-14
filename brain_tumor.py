@@ -1,6 +1,8 @@
 import streamlit as st
 import os
 from PIL import Image
+import requests
+from io import BytesIO
 
 def count_images_in_classes(directory):
     class_image_counts = {}
@@ -55,15 +57,12 @@ def show_sample_images(training_dir, testing_dir, training_counts, testing_count
                 image = Image.open(img_path)
                 st.image(image, caption=f"Class: {cls}")
 
-# Set the directory paths using raw string literal
-# Set the base directory
-base_dir = r'C:\Users\HP\Downloads\brain_tumor'
+# URL for the dataset
+base_url = "https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset"
 
-# Define the training and testing directories
-training_dir = os.path.join(base_dir, 'Training')
-testing_dir = os.path.join(base_dir, 'Testing')
-
-
+# Define the training and testing directories using URLs
+training_dir = f"{base_url}/Training"
+testing_dir = f"{base_url}/Testing"
 
 # Load the data
 training_counts, testing_counts = load_data(training_dir, testing_dir)
@@ -82,7 +81,7 @@ if training_counts is not None and testing_counts is not None:
     for cls, count in testing_counts.items():
         st.write(f'Class {cls}: {count} images')
 
-    # Display sample images
+    # Display sample images (assuming images are directly accessible via URLs)
     show_sample_images(training_dir, testing_dir, training_counts, testing_counts)
 
 else:
