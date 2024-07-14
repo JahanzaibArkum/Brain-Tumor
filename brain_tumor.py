@@ -1,12 +1,6 @@
 import streamlit as st
 import os
 from PIL import Image
-import kaggle
-
-# Function to download the Kaggle dataset
-def download_dataset():
-    # Adjust this command to match the Kaggle dataset you want to download
-    kaggle.api.dataset_download_files('masoudnickparvar/brain-tumor-mri-dataset', path='./', unzip=True)
 
 def count_images_in_classes(directory):
     class_image_counts = {}
@@ -28,7 +22,14 @@ def load_data(training_dir, testing_dir):
         print(f"Loading data from Testing directory: {testing_dir}")
         testing_counts = count_images_in_classes(testing_dir)
         return training_counts, testing_counts
-    except FileNotFoundError:
+    except FileNotFoundError as e:
+        print(f"FileNotFoundError: {e}")
+        return None, None
+    except PermissionError as e:
+        print(f"PermissionError: {e}")
+        return None, None
+    except Exception as e:
+        print(f"Error: {e}")
         return None, None
 
 def show_sample_images(training_dir, testing_dir, training_counts, testing_counts):
@@ -54,18 +55,10 @@ def show_sample_images(training_dir, testing_dir, training_counts, testing_count
                 image = Image.open(img_path)
                 st.image(image, caption=f"Class: {cls}")
 
-# Download the Kaggle dataset (you can call this manually or integrate it in your app)
-download_dataset()
-
-# Set the directory paths after downloading the dataset
-base_dir = './'  # Assuming the dataset was downloaded to the current directory
+# Set the directory paths using raw string literal
+base_dir = r'C:\Users\HP\Downloads\brain_tumor\main'
 training_dir = os.path.join(base_dir, 'Training')
 testing_dir = os.path.join(base_dir, 'Testing')
-
-# Print out the paths for verification
-print(f"Base directory: {base_dir}")
-print(f"Training directory: {training_dir}")
-print(f"Testing directory: {testing_dir}")
 
 # Load the data
 training_counts, testing_counts = load_data(training_dir, testing_dir)
