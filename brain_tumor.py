@@ -1,6 +1,12 @@
 import streamlit as st
 import os
 from PIL import Image
+import kaggle
+
+# Function to download the Kaggle dataset
+def download_dataset():
+    # Adjust this command to match the Kaggle dataset you want to download
+    kaggle.api.dataset_download_files('masoudnickparvar/brain-tumor-mri-dataset', path='./', unzip=True)
 
 def count_images_in_classes(directory):
     class_image_counts = {}
@@ -48,8 +54,11 @@ def show_sample_images(training_dir, testing_dir, training_counts, testing_count
                 image = Image.open(img_path)
                 st.image(image, caption=f"Class: {cls}")
 
-# Set the directory paths using raw string literal
-base_dir = r'C:\Users\HP\Downloads\brain_tumor\main'
+# Download the Kaggle dataset (you can call this manually or integrate it in your app)
+download_dataset()
+
+# Set the directory paths after downloading the dataset
+base_dir = './'  # Assuming the dataset was downloaded to the current directory
 training_dir = os.path.join(base_dir, 'Training')
 testing_dir = os.path.join(base_dir, 'Testing')
 
