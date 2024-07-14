@@ -15,7 +15,6 @@ def count_images_in_classes(directory):
 
     return class_image_counts
 
-
 def load_data(training_dir, testing_dir):
     try:
         training_counts = count_images_in_classes(training_dir)
@@ -23,7 +22,6 @@ def load_data(training_dir, testing_dir):
         return training_counts, testing_counts
     except FileNotFoundError:
         return None, None
-
 
 def show_sample_images(training_dir, testing_dir, training_counts, testing_counts):
     st.header("Sample Images")
@@ -47,7 +45,6 @@ def show_sample_images(training_dir, testing_dir, training_counts, testing_count
                 img_path = os.path.join(class_path, images[0])
                 image = Image.open(img_path)
                 st.image(image, caption=f"Class: {cls}")
-
 
 # Set the directory paths (adjust these paths to the location where you extracted the dataset)
 base_dir = r'C:\Users\HP\Downloads\archive\brain-tumor-mri-dataset-main'
