@@ -49,7 +49,7 @@ def show_sample_images(training_dir, testing_dir, training_counts, testing_count
                 st.image(image, caption=f"Class: {cls}")
 
 # Set the directory paths using alternate method
-base_dir = 'C:/Users/HP/Downloads/brain_tumor/main'
+base_dir = ' C:\Users\HP\Downloads\brain_tumor\main'
 training_dir = os.path.join(base_dir, 'Training')
 testing_dir = os.path.join(base_dir, 'Testing')
 
