@@ -1,10 +1,7 @@
 import streamlit as st
 import os
-import zipfile
 from PIL import Image
-from kaggle.api.kaggle_api_extended import KaggleApi
 
-# Function to count images in classes
 def count_images_in_classes(directory):
     class_image_counts = {}
     if os.path.exists(directory):
@@ -18,7 +15,6 @@ def count_images_in_classes(directory):
 
     return class_image_counts
 
-# Function to load data
 def load_data(training_dir, testing_dir):
     try:
         print(f"Loading data from Training directory: {training_dir}")
@@ -36,7 +32,6 @@ def load_data(training_dir, testing_dir):
         print(f"Error: {e}")
         return None, None
 
-# Function to show sample images
 def show_sample_images(training_dir, testing_dir, training_counts, testing_counts):
     st.header("Sample Images")
     
@@ -60,28 +55,21 @@ def show_sample_images(training_dir, testing_dir, training_counts, testing_count
                 image = Image.open(img_path)
                 st.image(image, caption=f"Class: {cls}")
 
-# Streamlit app layout
-st.title("Brain Tumor MRI Dataset Analysis")
-
-# Download the dataset using Kaggle API
-api = KaggleApi()
-api.authenticate()  # Make sure you've placed kaggle.json in ~/.kaggle
-
-# Dataset URL from Kaggle
-dataset_url = 'masoudnickparvar/brain-tumor-mri-dataset'
-
-# Define the base directory where the dataset will be downloaded
-base_dir = '/tmp/brain_tumor_dataset'
-
-# Download the dataset
-api.dataset_download_files(dataset_url, path=base_dir, unzip=True)
+# Set the directory paths using raw string literal
+# Set the base directory
+base_dir = r'C:\Users\HP\Downloads\brain_tumor'
 
 # Define the training and testing directories
 training_dir = os.path.join(base_dir, 'Training')
 testing_dir = os.path.join(base_dir, 'Testing')
 
+
+
 # Load the data
 training_counts, testing_counts = load_data(training_dir, testing_dir)
+
+# Streamlit app layout
+st.title("Brain Tumor MRI Dataset Analysis")
 
 if training_counts is not None and testing_counts is not None:
     st.header("Training Dataset")
@@ -98,4 +86,4 @@ if training_counts is not None and testing_counts is not None:
     show_sample_images(training_dir, testing_dir, training_counts, testing_counts)
 
 else:
-    st.error(f"Directory '{training_dir}' or '{testing_dir}' not found or empty.")
+    st.error(f"Directory '{training_dir}' or '{testing_dir}' not found or empty.")  
